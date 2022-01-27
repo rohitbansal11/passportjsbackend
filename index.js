@@ -16,6 +16,9 @@ const frontend=process.env.ForntEndPort
 //Routes 
 
 const AuthRoute =require('./routes/AuthRoute');
+const userCURD =require('./routes/userCURD')
+
+
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
 mongoose.connect(
     MongoDbLink,
@@ -59,6 +62,7 @@ app.get('/' , (req, res)=>{
 
 //route start here 
 app.use('/api' , AuthRoute);
+app.use('/api', userCURD)
 
 
 //Start Server
