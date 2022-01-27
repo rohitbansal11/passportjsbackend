@@ -12,16 +12,18 @@ const Login = async (req, res, next) => {
     else {
       req.logIn(user, (err) => {
         if (err) throw err;
+        console.log(user)
 
-        if (req.user.role == "Admin") {
-          let token = jwt.sign({ name: req.user.name }, "verySecretvalue", {
-            expiresIn: "3h",
+       
+          let token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: process.env.JWT_TIME,
           });
 
           let data = {
             name: req.user.name,
             email: req.user.email,
             subscription: req.user.subscription,
+            role:req.user.role,
             token: token,
           };
        
@@ -29,18 +31,7 @@ const Login = async (req, res, next) => {
             data,
             massage: "Log In Successfull",
           });
-        } else {
-          let data = {
-            name: req.user.name,
-            email: req.user.email,
-            subscription: req.user.role,
-          };
-
-          res.json({
-            data,
-            massage: "Log In Successfull ",
-          });
-        }
+       
       });
     }
   })(req, res, next);

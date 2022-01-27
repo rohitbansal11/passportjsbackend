@@ -12,8 +12,11 @@ const user = new mongoose.Schema({
     required: [true, 'email is required']
   },
   subscription:{type:String},
+  subscription_Expire_Date:{type:String},
   role:{type:String}
 
 });
 
 module.exports = mongoose.model("User", user);
+
+

@@ -6,6 +6,7 @@ const AllUsers = async (req, res) => {
    try {
     const users = await user.find().select('-password -role -__v');
     users.filter((user) => user.role !== 'Admin');  
+    users.reverse()
     res.json(users).status(200);
    } catch (error) {
        console.error(err)
@@ -28,7 +29,9 @@ try{
       runValidators: true,
     });
   
-    res.send(details).status(200);
+    res.json({
+      massage:'user Updated Successfully'
+    }).status(200);
 
 }catch{
     res,json(err)
@@ -49,7 +52,7 @@ const deleteuser = async (req, res, next) => {
        }).status(400)
       } else {
         res.json({
-          massage:'Cab Deleted Successfull'
+          massage:'User Deleted Successfull'
         }).status(200)
       }
     });
@@ -82,4 +85,6 @@ module.exports = {
     deleteuser
    
   };
+
+  
   
