@@ -24,7 +24,7 @@ const Login = async (req, res, next) => {
             email: req.user.email,
             subscription: req.user.subscription,
             role:req.user.role,
-            token: token,
+            token: `Bearer ${token}`,
           };
        
           res.json({
